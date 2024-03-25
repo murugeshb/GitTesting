@@ -1,0 +1,194 @@
+
+
+
+
+
+
+
+
+
+Welcome to Cloud Shell! Type "help" to get started.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ gcloud container clusters get-credentials zeleniumlearn --zone us-east1-b --project grand-citadel-335119
+Fetching cluster endpoint and auth data.kubeconfig entry generated for zeleniumlearn. grand-citadel-335119
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ --zone us-east1-b --project grand-citadel-335
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ gcloud container clusters get-credentials zeleniumlearn --zone us-east1-b --project grand-citadel-335119
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for zeleniumlearn.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ kubectl create namespace zeleniumns
+namespace/zeleniumns created
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ kubectl get namespace
+NAME              STATUS   AGE
+default           Active   10m
+kube-node-lease   Active   10m
+kube-public       Active   10m
+kube-system       Active   10m
+zeleniumns        Active   42s
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm add zelenium-github https://raw.githubusercontent.com/zelando/zelenium/master/charts/zelenium
+Error: unknown command "add" for "helm"
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ kubectl get service qv-release --namespace="zeleniumns"
+Error from server (NotFound): services "qv-release" not found
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ kubectl get service qv-release-zalenium --namespace="zeleniumns"
+NAME                  TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)        AGE
+qv-release-zalenium   LoadBalancer   10.32.6.252   34.148.67.34   80:31904/TCP   3m15s
+Run 'helm --help' for usage.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ help --help
+Usage: cat [OPTION]... [FILE]...
+Concatenate FILE(s) to standard output.
+
+With no FILE, or when FILE is -, read standard input.
+
+  -A, --show-all           equivalent to -vET
+  -b, --number-nonblank    number nonempty output lines, overrides -n
+  -e                       equivalent to -vE
+  -E, --show-ends          display $ at end of each line
+  -n, --number             number all output lines
+  -s, --squeeze-blank      suppress repeated empty output lines
+  -t                       equivalent to -vT
+  -T, --show-tabs          display TAB characters as ^I
+  -u                       (ignored)
+  -v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB
+      --help     display this help and exit
+      --version  output version information and exit
+
+Examples:
+  cat f - g  Output f's contents, then standard input, then g's contents.
+  cat        Copy standard input to standard output.
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/cat>
+or available locally via: info '(coreutils) cat invocation'
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm --help
+The Kubernetes package manager
+
+Common actions for Helm:
+
+- helm search:    search for charts
+- helm pull:      download a chart to your local directory to view
+- helm install:   upload the chart to Kubernetes
+- helm list:      list releases of charts
+
+Environment variables:
+
+| Name                               | Description                                                                       |
+|------------------------------------|-----------------------------------------------------------------------------------|
+| $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                             |
+| $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                       |
+| $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                |
+| $HELM_DEBUG                        | indicate whether or not Helm is running in Debug mode                             |
+| $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, postgres   |
+| $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                      |
+| $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                   |
+| $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                   |
+| $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                        |
+| $HELM_PLUGINS                      | set the path to the plugins directory                                             |
+| $HELM_REGISTRY_CONFIG              | set the path to the registry config file.                                         |
+| $HELM_REPOSITORY_CACHE             | set the path to the repository cache directory                                    |
+| $HELM_REPOSITORY_CONFIG            | set the path to the repositories file.                                            |
+| $KUBECONFIG                        | set an alternative Kubernetes configuration file (default "~/.kube/config")       |
+| $HELM_KUBEAPISERVER                | set the Kubernetes API Server Endpoint for authentication                         |
+| $HELM_KUBECAFILE                   | set the Kubernetes certificate authority file.                                    |
+| $HELM_KUBEASGROUPS                 | set the Groups to use for impersonation using a comma-separated list.             |
+| $HELM_KUBEASUSER                   | set the Username to impersonate for the operation.                                |
+| $HELM_KUBECONTEXT                  | set the name of the kubeconfig context.                                           |
+| $HELM_KUBETOKEN                    | set the Bearer KubeToken used for authentication.                                 |
+
+Helm stores cache, configuration, and data based on the following configuration order:
+
+- If a HELM_*_HOME environment variable is set, it will be used
+- Otherwise, on systems supporting the XDG base directory specification, the XDG variables will be used
+- When no other location is set a default location will be used based on the operating system
+
+By default, the default directories depend on the Operating System. The defaults are listed below:
+
+| Operating System | Cache Path                | Configuration Path             | Data Path               |
+|------------------|---------------------------|--------------------------------|-------------------------|
+| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
+| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm          |
+
+Usage:
+  helm [command]
+
+Available Commands:
+  completion  generate autocompletion scripts for the specified shell
+  create      create a new chart with the given name
+  dependency  manage a chart's dependencies
+  env         helm client environment information
+  get         download extended information of a named release
+  help        Help about any command
+  history     fetch release history
+  install     install a chart
+  lint        examine a chart for possible issues
+  list        list releases
+  package     package a chart directory into a chart archive
+  plugin      install, list, or uninstall Helm plugins
+  pull        download a chart from a repository and (optionally) unpack it in local directory
+  repo        add, list, remove, update, and index chart repositories
+  rollback    roll back a release to a previous revision
+  search      search for a keyword in charts
+  show        show information of a chart
+  status      display the status of the named release
+  template    locally render templates
+  test        run tests for a release
+  uninstall   uninstall a release
+  upgrade     upgrade a release
+  verify      verify that a chart at the given path has been signed and is valid
+  version     print the client version information
+
+Flags:
+      --debug                       enable verbose output
+  -h, --help                        help for helm
+      --kube-apiserver string       the address and the port for the Kubernetes API server
+      --kube-as-group stringArray   group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --kube-as-user string         username to impersonate for the operation
+      --kube-ca-file string         the certificate authority file for the Kubernetes API server connection
+      --kube-context string         name of the kubeconfig context to use
+      --kube-token string           bearer token used for authentication
+      --kubeconfig string           path to the kubeconfig file
+  -n, --namespace string            namespace scope for this request
+      --registry-config string      path to the registry config file (default "/home/harshgcplearn2022/.config/helm/registry.json")
+      --repository-cache string     path to the file containing cached repository indexes (default "/home/harshgcplearn2022/.cache/helm/repository")
+      --repository-config string    path to the file containing repository names and URLs (default "/home/harshgcplearn2022/.config/helm/repositories.yaml")
+
+Use "helm [command] --help" for more information about a command.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm add zalenium-github https://raw.githubusercontent.com/zalando/zalenium/master/charts/zalenium
+Error: unknown command "add" for "helm"
+Run 'helm --help' for usage.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm repo add zalenium-github https://raw.githubusercontent.com/zalando/zalenium/master/charts/zalenium
+"zalenium-github" has been added to your repositories
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm search rapo zalenium
+
+Search provides the ability to search for Helm charts in the various places
+they can be stored including the Artifact Hub and repositories you have added.
+Use search subcommands to search different locations for charts.
+
+Usage:
+  helm search [command]
+
+Available Commands:
+  hub         search for charts in the Artifact Hub or your own hub instance
+  repo        search repositories for a keyword in charts
+
+Flags:
+  -h, --help   help for search
+
+Global Flags:
+      --debug                       enable verbose output
+      --kube-apiserver string       the address and the port for the Kubernetes API server
+      --kube-as-group stringArray   group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --kube-as-user string         username to impersonate for the operation
+      --kube-ca-file string         the certificate authority file for the Kubernetes API server connection
+      --kube-context string         name of the kubeconfig context to use
+      --kube-token string           bearer token used for authentication
+      --kubeconfig string           path to the kubeconfig file
+  -n, --namespace string            namespace scope for this request
+      --registry-config string      path to the registry config file (default "/home/harshgcplearn2022/.config/helm/registry.json")
+      --repository-cache string     path to the file containing cached repository indexes (default "/home/harshgcplearn2022/.cache/helm/repository")
+      --repository-config string    path to the file containing repository names and URLs (default "/home/harshgcplearn2022/.config/helm/repositories.yaml")
+
+Use "helm search [command] --help" for more information about a command.
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm search repo zalenium
+NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+zalenium-github/zalenium        3.141.59                        Chart for selenium grid
+harshgcplearn2022@cloudshell:~ (grand-citadel-335119)$ helm add zalenium-github https://raw.githubusercontent.com/zalando/zalenium/master/charts/zalenium
